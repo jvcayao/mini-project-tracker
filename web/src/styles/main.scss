@@ -1,0 +1,442 @@
+@use 'variables' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: $background-light;
+  min-height: 100vh;
+}
+
+.app-container {
+  min-height: 100vh;
+  background-color: $background-light;
+}
+
+.page-container {
+  padding: $spacing-lg;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+
+  &__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+  }
+}
+
+// Project Header
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-lg;
+  padding: $spacing-lg;
+  background: white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+
+  &__info {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 28px;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  &__description {
+    color: $text-secondary;
+    margin-top: $spacing-sm;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+
+  &__search {
+    flex-shrink: 0;
+  }
+
+  &__filters {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    label {
+      color: $text-secondary;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.task-stats {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+  flex-wrap: wrap;
+
+  &__item {
+    background: white;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $border-radius-sm;
+    border: 1px solid $border-color;
+    text-align: center;
+    min-width: 100px;
+    box-shadow: $shadow-sm;
+
+    &--total {
+      border-top: 3px solid $primary-color;
+    }
+
+    &--todo {
+      border-top: 3px solid $status-todo;
+    }
+
+    &--in-progress {
+      border-top: 3px solid $status-in-progress;
+    }
+
+    &--done {
+      border-top: 3px solid $status-done;
+    }
+  }
+
+  &__count {
+    font-size: 28px;
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  &__label {
+    font-size: 12px;
+    color: $text-secondary;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+}
+
+.project-card {
+  background: white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+
+  &__header {
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__content {
+    padding: $spacing-lg;
+  }
+}
+
+.project-summary {
+  margin-bottom: $spacing-lg;
+
+  &__description {
+    color: $text-secondary;
+    margin-top: $spacing-sm;
+  }
+}
+
+.empty-state {
+  padding: $spacing-xl;
+  text-align: center;
+}
+
+.bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($primary-color, 0.05);
+  border: 1px solid rgba($primary-color, 0.2);
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-md;
+
+  span {
+    color: $text-secondary;
+    font-size: 14px;
+  }
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 1px solid $border-color;
+}
+
+.loading-skeleton {
+  &__card {
+    margin-bottom: $spacing-md;
+  }
+}
+
+// Priority tag colors
+.priority-tag {
+  &--high {
+    color: $priority-high;
+    background: rgba($priority-high, 0.1);
+    border-color: $priority-high;
+  }
+
+  &--medium {
+    color: $priority-medium;
+    background: rgba($priority-medium, 0.1);
+    border-color: $priority-medium;
+  }
+
+  &--low {
+    color: $priority-low;
+    background: rgba($priority-low, 0.1);
+    border-color: $priority-low;
+  }
+}
+
+// Responsive adjustments - Tablet
+@media (max-width: $breakpoint-md) {
+  .page-container {
+    padding: $spacing-md;
+  }
+
+  .project-header {
+    flex-direction: column;
+    gap: $spacing-md;
+
+    &__title {
+      font-size: 22px;
+      flex-wrap: wrap;
+    }
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+
+    &__search {
+      width: 100%;
+
+      .ant-input-search {
+        width: 100% !important;
+      }
+    }
+
+    &__filters {
+      justify-content: flex-start;
+    }
+  }
+
+  .task-stats {
+    justify-content: space-between;
+
+    &__item {
+      flex: 1;
+      min-width: 70px;
+      padding: $spacing-sm;
+    }
+
+    &__count {
+      font-size: 20px;
+    }
+  }
+
+  // Card header responsive
+  .ant-card-head {
+    .ant-card-head-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .ant-card-extra {
+      margin-left: 0;
+      padding-top: $spacing-sm;
+      width: 100%;
+
+      .ant-space {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  // List item responsive
+  .ant-list-item {
+    flex-wrap: wrap;
+
+    .ant-list-item-meta {
+      flex: 1 1 100%;
+      margin-bottom: $spacing-sm;
+    }
+
+    .ant-list-item-action {
+      margin-left: 0;
+      flex-wrap: wrap;
+
+      > li {
+        padding: 0 $spacing-xs;
+      }
+    }
+  }
+
+  // Hide some table columns on tablet
+  .ant-table {
+    .ant-table-cell:nth-child(4) {
+      display: none; // hide due date
+    }
+  }
+}
+
+// Responsive adjustments - Mobile
+@media (max-width: $breakpoint-sm) {
+  .page-container {
+    padding: $spacing-sm;
+  }
+
+  .project-header {
+    padding: $spacing-md;
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__description {
+      font-size: 14px;
+    }
+  }
+
+  .task-stats {
+    gap: $spacing-sm;
+
+    &__item {
+      min-width: 60px;
+      padding: $spacing-xs $spacing-sm;
+    }
+
+    &__count {
+      font-size: 18px;
+    }
+
+    &__label {
+      font-size: 10px;
+    }
+  }
+
+  .filter-bar {
+    gap: $spacing-sm;
+
+    &__filters {
+      flex-direction: column;
+      width: 100%;
+      gap: $spacing-sm;
+    }
+
+    &__item {
+      width: 100%;
+      justify-content: space-between;
+
+      .ant-select {
+        flex: 1;
+      }
+    }
+  }
+
+  .bulk-actions {
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+
+    span {
+      width: 100%;
+    }
+  }
+
+  .pagination-wrapper {
+    justify-content: center;
+
+    .ant-pagination-total-text {
+      display: none;
+    }
+  }
+
+  // Hide more columns on mobile
+  .ant-table {
+    .ant-table-cell:nth-child(2),
+    .ant-table-cell:nth-child(4) {
+      display: none; // hide priority and due date
+    }
+  }
+
+  // Card header on mobile
+  .ant-card-head-title {
+    font-size: 16px;
+  }
+
+  .ant-card-extra {
+    .ant-space {
+      flex-direction: column;
+      align-items: stretch !important;
+      gap: $spacing-sm !important;
+
+      .filter-bar__item {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .ant-btn {
+        width: 100%;
+      }
+    }
+  }
+
+  // List actions on mobile
+  .ant-list-item-action {
+    > li {
+      padding: 0 !important;
+
+      .ant-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+    }
+  }
+}
