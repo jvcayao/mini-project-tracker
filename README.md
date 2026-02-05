@@ -64,7 +64,12 @@ Runs on http://localhost
 ```bash
 cd api && php artisan serve
 ```
-Runs on http://localhost:8000 (update `VITE_API_URL` in `web/.env` if needed)
+Runs on http://localhost:8000
+
+**Note:** Frontend is configured for Sail (port 80). If using `php artisan serve`, update proxy in `web/vite.config.ts`:
+```js
+target: 'http://localhost:8000'
+```
 
 **Frontend:**
 ```bash
@@ -75,6 +80,8 @@ Runs on http://localhost:5173
 ## Seed Data
 
 ```bash
+cd api
+
 # With Sail
 ./vendor/bin/sail artisan db:seed
 
